@@ -1,0 +1,149 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+/* Reset & Global */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { font-family: "Poppins", sans-serif; background: #111; color: #fff; scroll-behavior: smooth; }
+
+/* Navbar */
+.navbar {
+  width: 100%; position: fixed; top: 0; left: 0;
+  padding: 1rem 0; z-index: 10;
+  transition: background-color .3s, box-shadow .3s;
+}
+.nav-transp { background: rgba(0,0,0,.4); }
+.nav-solid { background: rgba(0,0,0,.95); box-shadow: 0 2px 10px rgba(0,0,0,.4); }
+
+.container { width: 90%; max-width: 1200px; margin: auto; }
+.row { display: flex; align-items: center; justify-content: space-between; }
+.site-title { color: darkorange; font-weight: 700; }
+
+.nav-menu { display: flex; gap: 1.5rem; list-style: none; align-items: center; }
+.nav-menu a { color: #fff; font-weight: 500; transition: .3s; }
+.nav-menu a:hover { color: darkorange; }
+
+/* Dropdown */
+.dropdown { position: relative; }
+.dropdown-menu {
+  position: absolute; top: 100%; left: 0;
+  background: rgba(0,0,0,.9);
+  list-style: none; padding: .5rem 0; min-width: 160px;
+  border-radius: 8px; display: none; flex-direction: column;
+  box-shadow: 0 3px 10px rgba(0,0,0,.3); z-index: 999;
+}
+.dropdown-menu li a { padding: .6rem 1rem; display: block; color: #fff; }
+.dropdown-menu li a:hover { background: darkorange; color: #111; }
+.dropdown:hover .dropdown-menu { display: flex; }
+
+/* Hamburger */
+.menu-toggle {
+  display: none; flex-direction: column; justify-content: space-between;
+  width: 26px; height: 18px; background: none; border: none; cursor: pointer; z-index: 11;
+}
+.menu-toggle span { height: 3px; width: 100%; background: #fff; border-radius: 3px; transition: .3s; }
+.menu-toggle.active span:nth-child(1) { transform: translateY(7.5px) rotate(45deg); }
+.menu-toggle.active span:nth-child(2) { opacity: 0; }
+.menu-toggle.active span:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
+
+/* Buttons */
+.login-btn {
+  background: darkorange; border: none; padding: .4rem 1rem;
+  border-radius: 6px; color: #111; cursor: pointer; font-weight: 600; transition: .3s;
+}
+.login-btn:hover { background: orange; }
+
+/* Header */
+.landing-page {
+  height: 100vh; background: url('/bg-main.JPG') center/cover no-repeat;
+  position: relative; display: flex; justify-content: center; align-items: center;
+}
+.header-overlay { position: absolute; inset: 0; background: rgba(0,0,0,.5); }
+.landing-content { z-index: 2; text-align: center; }
+.welcome-text h1 { color: darkorange; font-size: 2.5rem; }
+.welcome-text h2 { margin: .5rem 0; }
+
+/* Sections */
+#explore, #recommend { padding: 8vh 0; text-align: center; }
+#explore { background: #fafafa; color: #222; }
+#recommend { background: #222; color: #fff; }
+
+.explore-grid, .recom-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 2rem;
+}
+.exp-card, .recom-card {
+  border-radius: 12px; overflow: hidden; transition: transform .3s;
+  box-shadow: 0 3px 10px rgba(0,0,0,.2);
+}
+.exp-card:hover { transform: translateY(-5px); }
+.exp-card img { width: 100%; height: 180px; object-fit: cover; }
+.card-text { padding: 1.2rem; }
+.card-text a { color: darkorange; font-weight: 600; }
+
+/* Recommendation cards */
+.recom-card { background: #333; padding: 1rem; }
+.dummy-img { height: 150px; border-radius: 10px; background: linear-gradient(135deg, #ffb84d, #ff8800); margin-bottom: 1rem; }
+
+/* Login Overlay */
+.overlay {
+  position: fixed; inset: 0; background: rgba(0,0,0,.7);
+  display: flex; justify-content: center; align-items: center; z-index: 99;
+}
+.login-card {
+  background: #fff; color: #111; padding: 2rem; border-radius: 16px;
+  width: 90%; max-width: 360px; display: flex; flex-direction: column; gap: 1rem; text-align: center;
+}
+.login-card input { padding: .7rem; border-radius: 8px; border: 1px solid #ddd; outline: none; }
+.login-submit {
+  background: darkorange; border: none; padding: .8rem; border-radius: 8px;
+  font-weight: 600; cursor: pointer; transition: .3s;
+}
+.login-submit:hover { background: orange; }
+.login-footer { font-size: .9rem; }
+.login-footer a { color: darkorange; font-weight: 600; }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .menu-toggle { display: flex; }
+  .nav-menu {
+    flex-direction: column; background: rgba(0,0,0,.9);
+    position: absolute; top: 100%; left: 0; right: 0; display: none; text-align: center; padding: 1rem 0;
+  }
+  .nav-menu.show { display: flex; }
+  .dropdown-menu { position: static; background: none; box-shadow: none; padding: 0; }
+  .dropdown:hover .dropdown-menu { display: block; }
+}
+
+
+/* Overlay shared by Login & Register */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 99;
+}
+
+.login-card {
+  background: #fff;
+  color: #111;
+  padding: 2rem;
+  border-radius: 16px;
+  width: 90%;
+  max-width: 360px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  text-align: center;
+  animation: fadeIn .2s ease-in-out;
+}
+
+.reg-error{
+  color: red;
+  
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(.9); }
+  to { opacity: 1; transform: scale(1); }
+}
