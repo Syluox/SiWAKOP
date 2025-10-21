@@ -163,6 +163,7 @@ function App() {
             >
               <span></span><span></span><span></span>
             </button>
+            <img className="site-logo" src=""/>
             <h1 className="site-title">SiWAKOP</h1>
           </div>
 
