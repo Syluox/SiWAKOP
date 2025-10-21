@@ -1,0 +1,32 @@
+/* AdminDashboard.css */
+.admin-dashboard {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.users-list, ul {
+  list-style: none;
+  padding: 0;
+}
+
+.user-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.add-place-section input, textarea, select {
+  display: block;
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .admin-dashboard {
+    padding: 10px;
+  }
+  input, textarea, select {
+    font-size: 14px;
+  }
+}

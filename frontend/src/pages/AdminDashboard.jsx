@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
-import { MapContainer, TileLayer, useMapEvents } from 'react-leaflet';
+import { MapContainer, TileLayer, useMapEvents, Marker } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import './AdminDashboard.css';
 
@@ -33,19 +33,19 @@ const AdminDashboard = () => {
     }
     axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
     // Fetch users
-    axios.get('/admin/users')
+    axios.get('http://localhost:5000/api/admin/users')
       .then(res => setUsers(res.data))
       .catch(err => console.error('Error fetching users:', err));
     // Fetch places
-    axios.get('/places')
+    axios.get('http://localhost:5000/api/places')
       .then(res => setPlaces(res.data))
       .catch(err => console.error('Error fetching places:', err));
     // Fetch requested places (assume /admin/requests endpoint)
-    axios.get('/admin/requests')
+    axios.get('http://localhost:5000/api/admin/requests')
       .then(res => setRequests(res.data))
       .catch(err => console.error('Error fetching requests:', err));
     // Fetch complains (from previous /admin/complains)
-    axios.get('/admin/complains')
+    axios.get('http://localhost:5000/api/admin/complains')
       .then(res => setComplains(res.data))
       .catch(err => console.error('Error fetching complains:', err));
   }, []);
@@ -69,7 +69,7 @@ const AdminDashboard = () => {
   };
 
   const addPlace = () => {
-    axios.post('/admin/places', newPlace)
+    axios.post('http://localhost:5000/api/admin/places', newPlace)
       .then(res => {
         alert('Place added');
         setPlaces([...places, res.data]);

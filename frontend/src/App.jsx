@@ -17,7 +17,7 @@ import MapSection from "./section/mapSection";
 
 // Page Export
 import UserPage from "./pages/UserPage.jsx";
-import AdminPage from "./pages/AdminPage";
+import AdminDashboard from "./pages/AdminDashboard.jsx";
 import { UserControler } from "./usesrHandle.jsx";
 
 
@@ -57,6 +57,17 @@ function App() {
     const loginHandler = new UserControler.LoginControl(usernameValue,passwordValue);
     try {
       const data= await loginHandler.handleLogin();
+      //admin login
+      if(data.token){
+        const userToNavigate = data.username || usernameValue;
+        alert("✅ " + data.message);
+        setLoggedIn(true);
+        setUsername(usernameValue);
+        setShowLogin(false);
+        alert(localStorage.getItem('token'));
+        navigate(`/admin`);
+        return;
+      }
       if (data.token) {
         const userToNavigate = data.username || usernameValue;
         alert("✅ " + data.message);
@@ -65,7 +76,8 @@ function App() {
         setShowLogin(false);
         alert(localStorage.getItem('token'));
         navigate(`/user/${usernameValue}`);
-      } else {
+      } 
+      else {
         alert("❌ " + data.message);
       }
     } catch (err) {
@@ -252,7 +264,7 @@ function App() {
         <Route path="/user/:username" element={<UserPage />} />
       </Routes>
       <Routes>
-        <Route path="/admin" element={<AdminPage />} /> 
+        <Route path="/admin" element={<AdminDashboard />} /> 
       </Routes>
 
     </>

@@ -11,6 +11,7 @@ import { createProxyMiddleware } from 'http-proxy-middleware';
 /// Routes
 import placesRouter from "./routes/placesAuth.js";
 import userAuth from "./routes/userAuth.js";
+import adminAuth from "./routes/adminAuth.js"
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -29,6 +30,7 @@ app.use('/imgChace', express.static(path.join(__dirname, 'public/imgChace'),{
 // app.use("/api/auth", authRouter);
 app.use("/api/places", placesRouter);
 app.use("/api/user", userAuth);
+app.use('/api/admin', adminAuth);
 
 const connectDB = async (dbName) => {
   try {
