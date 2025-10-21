@@ -1,0 +1,91 @@
+/* UserPage.css */
+.user-dashboard {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.user-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.profile-picture {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  margin-right: 15px;
+}
+
+.user-head-text {
+  flex: 1;
+}
+
+.edit-profile-btn {
+  font-size: 24px;
+}
+
+.user-info {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.activity-container, .favorites-container {
+  flex: 1;
+  background: #f0f0f0;
+  padding: 15px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.plan-item {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.plan-image {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+}
+
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+  z-index: 1000;
+  width: 300px;
+}
+
+.modal input, .modal select, .modal textarea {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.modal button {
+  margin-right: 10px;
+}
+
+@media (max-width: 768px) {
+  .user-info {
+    flex-direction: column;
+  }
+  .plan-item {
+    flex-direction: column;
+  }
+  .plan-image {
+    width: 100%;
+    height: auto;
+  }
+  .modal {
+    width: 90%;
+  }
+}

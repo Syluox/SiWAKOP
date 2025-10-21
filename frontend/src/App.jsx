@@ -1,17 +1,40 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState,useRef} from "react";
+import { Routes, Route,useNavigate  } from "react-router-dom";
 import "./App.css";
 import { TypingGreeting } from "./TypingGreeting";
 import { FadingQuote } from "./PaluQuote";
 import {cUser} from "../../backend/backendTranslator";
+import About from "./section/About";
+import axios from 'axios';
+
+// Export Controller
+export {UserControler} from "./usesrHandle.jsx";
+
+// Section Export
+import ExploreSection from "./section/explore";
+import RecommendSection from "./section/recomend";
+import MapSection from "./section/mapSection";
+
+// Page Export
+import UserPage from "./pages/UserPage.jsx";
+import AdminPage from "./pages/AdminPage";
+import { UserControler } from "./usesrHandle.jsx";
+
 
 function App() {
+
+  const navigate = useNavigate();
+
   const [showLogin, setShowLogin] = useState(false);
   const [showRegister, setShowRegister] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
   const [username, setUsername] = useState("");
-  const [regerrtxt,regErrTxt] = useState("");
-  const [reginval,regInVal] = useState(false);
+  const [regErrTxt, setRegErrTxt] = useState("");
+  const [regInVal, setRegInVal] = useState(false);
+
+  //useRef for tracking mounted state
+  const reccomendRef = useRef(null);
 
   // Handle navbar transparency
   useEffect(() => {
@@ -31,20 +54,17 @@ function App() {
   const handleLogin = async () => {
     const usernameValue = document.querySelector("input[placeholder='Username or Email']").value;
     const passwordValue = document.querySelector("input[placeholder='Password']").value;
+    const loginHandler = new UserControler.LoginControl(usernameValue,passwordValue);
     try {
-      const res = await fetch("http://localhost:5000/api/auth/sulap", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username: usernameValue, password: passwordValue }),
-      });
-
-      const data = await res.json();
-
-      if (data.success) {
+      const data= await loginHandler.handleLogin();
+      if (data.token) {
+        const userToNavigate = data.username || usernameValue;
         alert("✅ " + data.message);
         setLoggedIn(true);
         setUsername(usernameValue);
         setShowLogin(false);
+        alert(localStorage.getItem('token'));
+        navigate(`/user/${usernameValue}`);
       } else {
         alert("❌ " + data.message);
       }
@@ -58,41 +78,66 @@ function App() {
     setLoggedIn(false);
     setUsername("");
     alert("👋 You have logged out successfully.");
+    setUsername("");
+    navigate("/");
   };
 
   const closeMenu = () => setMenuOpen(false);
 
-  // Handle register
-const handleRegister = async () => {
-  const usernameValue = document.querySelector("input[placeholder='New Username']").value;
-  const emailValue = document.querySelector("input[placeholder='Email']").value;
-  const passwordValue = document.querySelector("input[placeholder='New Password']").value;
+  const scrollToRecommend = () => {
+    if (reccomendRef.current) {
+      reccomendRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
-  if(usernameValue.length<5){
-    alert("❌ Username must be at least 5 characters long")
-    return;
-  }
+  // Handle register with Axios
+  const handleRegister = async () => {
+    const usernameValue = document.querySelector("input[placeholder='New Username']").value;
+    const emailValue = document.querySelector("input[placeholder='Email']").value;
+    const passwordValue = document.querySelector("input[placeholder='New Password']").value;
 
-  // Password length check
-  if (passwordValue.length < 6) {
-    alert("❌ Password must be at least 6 characters long");
-    return;
-  }
-  // Simple email validation
-  const emailRegex = /^[^\s@]+@[^\s@]+\.com$/;
-  if (!emailRegex.test(emailValue)) {
-    alert("❌ Email must contain '@' and end with '.com'");
-    return;
-  }
-  try {
-    const res = await fetch("http://localhost:5000/api/auth/register",{
-      method:"POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data)
-    })    
-  } catch (err) {
-    alert("⚠️ Server error, try again later.");
-  }};
+    if(usernameValue.length < 5){
+      setRegErrTxt("Username must be at least 5 characters long");
+      setRegInVal(true);
+      return;
+    }
+
+    // Password length check
+    if (passwordValue.length < 6) {
+      setRegErrTxt("Password must be at least 6 characters long");
+      setRegInVal(true);
+      return;
+    }
+    // Simple email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.com$/;
+    if (!emailRegex.test(emailValue)) {
+      setRegErrTxt("Email must contain '@' and end with '.com'");
+      setRegInVal(true);
+      return;
+    }
+    
+    try {
+      const res = await axios.post("http://localhost:5000/api/user/register", {
+        username: usernameValue,
+        email: emailValue,
+        password: passwordValue
+      });
+      
+      if (res.data.success) {
+        alert("✅ Registered successfully");
+        setShowRegister(false);
+        setShowLogin(true);
+        setUsername(usernameValue);
+
+      } else {
+        setRegErrTxt(res.data.message || "Registration failed");
+        setRegInVal(true);
+      }
+    } catch (err) {
+      setRegErrTxt(err.response?.data?.message || "⚠️ Server error, try again later.");
+      setRegInVal(true);
+    }
+  };
 
   return (
     <>
@@ -106,7 +151,7 @@ const handleRegister = async () => {
             >
               <span></span><span></span><span></span>
             </button>
-            <h1 className="site-title">SiWAKOPs</h1>
+            <h1 className="site-title">SiWAKOP</h1>
           </div>
 
           <ul className={`nav-menu ${menuOpen ? "show" : ""}`}>
@@ -115,20 +160,14 @@ const handleRegister = async () => {
             <li className="dropdown">
               <a href="#explore" onClick={(e) => e.preventDefault()}>Jelajah ▾</a>
               <ul className="dropdown-menu">
-                <li><a href="#nature" onClick={closeMenu}>Alam</a></li>
-                <li><a href="#culture" onClick={closeMenu}>Budaya</a></li>
-                <li><a href="#food" onClick={closeMenu}>Kuliner</a></li>
+                <li><a href="#nature" onClick={closeMenu}>Pemandangan</a></li>
+                <li><a href="#culture" onClick={closeMenu}>Hiburan</a></li>
+                <li><a href="#food" onClick={closeMenu}>Budaya</a></li>
+                <li><a href="#food" onClick={closeMenu}>Lainya</a></li>
               </ul>
             </li>
 
-            <li className="dropdown">
-              <a href="#recommend" onClick={(e) => e.preventDefault()}>Rekomendasi ▾</a>
-              <ul className="dropdown-menu">
-                <li><a href="#hotels" onClick={closeMenu}>Hotel</a></li>
-                <li><a href="#restaurants" onClick={closeMenu}>Restoran</a></li>
-                <li><a href="#activities" onClick={closeMenu}>Aktivitas</a></li>
-              </ul>
-            </li>
+            <a href="#recommend" onClick={(e) => e.preventDefault()}>Rekomendasi</a>
 
             <li><a href="#" onClick={closeMenu}>About</a></li>
 
@@ -166,48 +205,6 @@ const handleRegister = async () => {
           <FadingQuote />
         </div>
       </header>
-
-      {/* EXPLORE */}
-      <section id="explore">
-        <div className="container">
-          <div id="main-text">
-            <h1>PLACE TO EXPLORE</h1>
-            <p>Temukan tempat-tempat indah di Palu dan sekitarnya dengan SiWAKOPs.</p>
-          </div>
-
-          <div className="explore-grid">
-            {[1, 2, 3, 4].map((i) => (
-              <div key={i} className="exp-card">
-                <img src="/dum-img.jpg" alt={`Nature ${i}`} />
-                <div className="card-text">
-                  <h1>Nature #{i}</h1>
-                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. At officia quasi tempora.</p>
-                  <a href="#">Lebih Lanjut →</a>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* RECOMMEND */}
-      <section id="recommend">
-        <div className="container">
-          <div id="main-text">
-            <h1>RECOMMENDED PLACES</h1>
-            <p>Berikut rekomendasi terbaik untuk Anda kunjungi saat di Palu.</p>
-          </div>
-          <div className="recom-grid">
-            {[...Array(6)].map((_, i) => (
-              <div key={i} className="recom-card">
-                <div className="dummy-img"></div>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta, nostrum quae.</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* LOGIN OVERLAY */}
       {showLogin && (
         <div className="overlay" onClick={() => setShowLogin(false)}>
@@ -231,7 +228,7 @@ const handleRegister = async () => {
             <input type="text" placeholder="New Username" />
             <input type="email" placeholder="Email" />
             <input type="password" placeholder="New Password" />
-            {reginval && (<p className="reg-error">{regErrTxt}!</p>)}
+            {regInVal && (<p className="reg-error">{regErrTxt}!</p>)}
             <button className="login-submit " onClick={handleRegister}>Register</button>
             <p className="login-footer">
               Already have an account?{" "}
@@ -242,6 +239,22 @@ const handleRegister = async () => {
           </div>
         </div>
       )}
+      <Routes>
+        <Route path="/" element={
+          <>
+            <RecommendSection ref={reccomendRef}/>
+            <MapSection/>
+            <About />
+          </>
+      } />
+      </Routes>
+      <Routes>
+        <Route path="/user/:username" element={<UserPage />} />
+      </Routes>
+      <Routes>
+        <Route path="/admin" element={<AdminPage />} /> 
+      </Routes>
+
     </>
   );
 }

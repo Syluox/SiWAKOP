@@ -1,0 +1,821 @@
+[
+  {
+    "name": "Pantai Kamnel",
+    "category": "Pantai",
+    "description": "Pantai Kamnel (Kampung Nelayan) terletak di Kelurahan Talise, Kota Palu, hanya sekitar 10-15 menit dari pusat kota. Pantai ini menyuguhkan keindahan Teluk Palu dengan latar pegunungan Gawalise yang menawan, menjadikannya tempat favorit untuk bersantai, menikmati suasana pagi yang tenang, hingga menyaksikan indahnya matahari terbenam. Selain bersantai, pengunjung juga bisa berenang, memancing, atau mencicipi kuliner laut di sekitar pantai. Dengan akses mudah dan biaya kunjungan yang terjangkau, Pantai Kamnel menjadi destinasi populer bagi warga Palu. Meski demikian, kebersihan pantai masih perlu dijaga agar pesona alaminya tetap lestari.",
+    "address": "Jl kaombona, talise",
+    "kecamatan": "Kec. Mantikulore",
+    "operating_hours": {
+      "type": "24_hour"
+    },
+    "price": {
+      "entry_fee": 0.0,
+      "parking_bike": 0.0,
+      "parking_car": 0.0,
+      "note": "Gratis, namun parkir mungkin dikenakan biaya tidak resmi."
+    },
+    "facilities": [
+      "Area parkir kendaraan (motor & mobil)",
+      "Rumah makan & warung kuliner di sekitar pantai",
+      "Area duduk & bersantai di tepi pantai",
+      "Pemandangan laut & matahari terbenam dengan latar pegunungan Gawalise"
+    ],
+    "latitude": -0.864660,
+    "longitude": 119.876984,
+    "photo_url": "https://files.catbox.moe/1t89iw.jpg"
+  },
+  {
+    "id": 2,
+    "name": "Hutan Kota",
+    "category": "Rekreasi",
+    "description": "Hutan Kota Palu merupakan ruang terbuka hijau seluas kurang lebih 100 hektare yang berfungsi sebagai paru-paru kota sekaligus tempat rekreasi masyarakat. Di sini pengunjung bisa berolahraga, bersantai, hingga menikmati suasana alam yang asri, sekaligus menjadi sarana edukasi lingkungan dan wisata keluarga di tengah Kota Palu.",
+    "address": "Jl. Jabal Nur, Talise",
+    "kecamatan": "Kec. Mantikulore",
+    "operating_hours": {
+      "type": "24_hour"
+    },
+    "price": {
+      "entry_fee": 0.0,
+      "parking_bike": null,
+      "parking_car": null,
+      "note": "Gratis, parkir tidak spesifik."
+    },
+    "facilities": [
+      "Area parkir kendaraan",
+      "Jogging track",
+      "Lapangan basket",
+      "Arena sepeda BMX",
+      "Area seni & budaya (pentas kesenian)",
+      "Toilet umum",
+      "Warung makan / kuliner UMKM",
+      "Spot foto & area bersantai"
+    ],
+    "latitude": -0.870671,
+    "longitude": 119.880111,
+    "photo_url": "https://files.catbox.moe/olxmje.jpg"
+  },
+  {
+    "id": 3,
+    "name": "Tugu Wisata Perdamaian",
+    "category": "Budaya/Sejarah",
+    "description": "Tugu Perdamaian Nosarara Nosabatutu di Bukit Tondo, Palu, merupakan monumen simbol persatuan dan persaudaraan masyarakat Sulawesi Tengah. Dari sini pengunjung bisa menikmati panorama indah Kota Palu dan Teluk Palu, sekaligus melihat ikon Gong Perdamaian Nusantara yang menjadi daya tarik utama.",
+    "address": "Jl. Soekarno Hatta, Tondo",
+    "kecamatan": "Kec. Mantikulore",
+    "operating_hours": {
+      "type": "daily",
+      "start": "07:00",
+      "end": "20:00"
+    },
+    "price": {
+      "entry_fee": 0.0,
+      "parking_bike": 10000.0,
+      "parking_car": 10000.0,
+      "note": "Masuk area gratis. Biaya parkir motor dan mobil disamakan."
+    },
+    "facilities": [
+      "Area parkir kendaraan: motor, mobil, bus",
+      "Toilet umum (sekitar 5 unit)",
+      "Tempat ibadah / mushola",
+      "Warung makanan/minuman/satu kafe",
+      "Taman / area bersantai dan spot foto instagramable"
+    ],
+    "latitude": -0.856030,
+    "longitude": 119.911956,
+    "photo_url": "https://files.catbox.moe/visgj1.jpg"
+  },
+  {
+    "id": 4,
+    "name": "Taman Patung Kuda",
+    "category": "Taman",
+    "description": "Taman Patung Kuda adalah salah satu ruang publik di Kota Palu yang ditandai dengan ikon patung kuda di tengahnya. Taman ini sering dijadikan tempat bersantai, berolahraga ringan, hingga lokasi berkumpul warga. Lokasinya yang strategis membuatnya mudah dijangkau dan ramai dikunjungi, terutama pada sore dan malam hari.",
+    "address": "Jl. Bantilan, Lere",
+    "kecamatan": "Kec. Palu Barat",
+    "operating_hours": {
+      "type": "24_hour"
+    },
+    "price": {
+      "entry_fee": 0.0,
+      "parking_bike": 0.0,
+      "parking_car": 0.0,
+      "note": "Gratis."
+    },
+    "facilities": [
+      "Bangku taman untuk tempat duduk dan bersantai",
+      "Jogging Track",
+      "Area Jajanan"
+    ],
+    "latitude": -0.890646,
+    "longitude": 119.846930,
+    "photo_url": "https://files.catbox.moe/vkr2c3.jpg"
+  },
+  {
+    "id": 5,
+    "name": "Bianglala Baywalk Sky",
+    "category": "Rekreasi",
+    "description": "Bianglala Baywalk Sky di Citraland Palu adalah wahana roda ferris besar dengan lampu warna-warni yang indah pada malam hari. Dari atasnya, pengunjung bisa menikmati panorama Teluk Palu dan pegunungan sekitar, menjadikannya spot rekreasi sekaligus tempat foto favorit.",
+    "address": "Perumahan Citraland, Tondo",
+    "kecamatan": "Kec. Mantikulore",
+    "operating_hours": {
+      "type": "daily",
+      "start": "16:00",
+      "end": "22:00"
+    },
+    "price": {
+      "entry_fee": 2000.0,
+      "parking_bike": null,
+      "parking_car": null,
+      "note": "Naik wahana Bianglala Rp 20.000 per 15 menit."
+    },
+    "facilities": [
+      "Wahana Bianglala (Ferris Wheel)",
+      "Area bermain anak",
+      "Food street & container café",
+      "Spot foto instagramable",
+      "Penyewaan sepeda & scooter",
+      "Area parkir luas",
+      "Toilet umum (4 unit)",
+      "Tempat ibadah"
+    ],
+    "latitude": -0.832177,
+    "longitude": 119.880195,
+    "photo_url": "https://files.catbox.moe/qu7716.jpg"
+  },
+  {
+    "id": 6,
+    "name": "Taman Huntap Balaroa",
+    "category": "Taman",
+    "description": "Taman Huntap Balaroa adalah ruang terbuka hijau di kawasan Hunian Tetap Balaroa, Palu. Taman ini berfungsi sebagai tempat bersantai, berolahraga ringan, dan berkumpul warga. Di dalamnya juga terdapat Balaroa Memorial Wall yang mengenang korban likuefaksi 28 September 2018.",
+    "address": "RTH Huntap Balaroa, Balaroa",
+    "kecamatan": "Kec. Palu Barat",
+    "operating_hours": {
+      "type": "24_hour"
+    },
+    "price": {
+      "entry_fee": 0.0,
+      "parking_bike": 0.0,
+      "parking_car": 0.0,
+      "note": "Gratis."
+    },
+    "facilities": [
+      "Toilet Umum",
+      "Spot Foto",
+      "Bangku Taman"
+    ],
+    "latitude": -0.908164,
+    "longitude": 119.836438,
+    "photo_url": "https://files.catbox.moe/4iko4z.jpg"
+  },
+  {
+    "id": 7,
+    "name": "Bukit indah Doda",
+    "category": "Alam",
+    "description": "Bukit Indah Doda adalah hotel dan resor Terletak di sekitar kota palu barat, perpaduan suasana alam yang sejuk dan pemandangan kota Palu dari atas bukit.",
+    "address": "Jl totosi, Doda",
+    "kecamatan": "Kec. Palu Barat",
+    "operating_hours": {
+      "type": "daily",
+      "start": "09:00",
+      "end": "22:00"
+    },
+    "price": {
+      "entry_fee": 10000.0,
+      "parking_bike": 0.0,
+      "parking_car": 0.0,
+      "note": "Biaya masuk Rp 10.000 per orang. Parkir gratis."
+    },
+    "facilities": [
+      "Kolam renang",
+      "Penginapan",
+      "Meeting room",
+      "Resto"
+    ],
+    "latitude": -0.916074,
+    "longitude": 119.830014,
+    "photo_url": "https://files.catbox.moe/2kc2n4.jpg"
+  },
+  {
+    "id": 8,
+    "name": "Wisata Bulu Tanda Sibedi",
+    "category": "Alam",
+    "description": "Wisata Bulu Tanda atau dikenal juga sebagai Bukit Satu Pohon terletak di Desa Sibedi, Kecamatan Marawola, Kabupaten Sigi, Sulawesi Tengah. Daya tarik utamanya adalah sebuah pohon tunggal yang berdiri di puncak bukit, menjadi ikon khas tempat ini. Dari atas, pengunjung dapat menikmati panorama indah yang membentang luas, mencakup wilayah Kota Palu hingga Sigi.",
+    "address": "Sibedi",
+    "kecamatan": "Kec. marawola",
+    "operating_hours": {
+      "type": "24_hour"
+    },
+    "price": {
+      "entry_fee": 2000.0,
+      "parking_bike": 5000.0,
+      "parking_car": 5000.0,
+      "note": "Biaya parkir mobil dan motor disamakan."
+    },
+    "facilities": [
+      "Area Parkir",
+      "Spot untuk menikmati panorama alam dan pemandangan Kota Palu",
+      "Warung kecil di sekitar area wisata",
+      "Toilet umum"
+    ],
+    "latitude": -0.96920,
+    "longitude": 119.84829,
+    "photo_url": "https://files.catbox.moe/zoulj8.jpg"
+  },
+  {
+    "id": 9,
+    "name": "Sou Raja Cagar Budaya Banua Oge",
+    "category": "Budaya/Sejarah",
+    "description": "Sou Raja, atau Banua Oge / Banua Mbaso, adalah sebuah cagar budaya rumah adat peninggalan Kerajaan Palu yang terletak di Kelurahan Lere, Kecamatan Palu Barat, Kota Palu, Sulawesi Tengah.",
+    "address": "Jl. Pangeran Hidayat",
+    "kecamatan": "Kec. Palu Barat",
+    "operating_hours": {
+      "type": "daily",
+      "start": "06:00",
+      "end": "18:00"
+    },
+    "price": {
+      "entry_fee": 5000.0,
+      "parking_bike": null,
+      "parking_car": null,
+      "note": "Biaya parkir tidak spesifik."
+    },
+    "facilities": [
+      "Area parkir untuk pengunjung",
+      "Pemandu lokal/penjaga situs yang memberi informasi sejarah",
+      "Ruang pamer rumah adat dengan pembagian ruang tradisional",
+      "Spot foto",
+      "Toilet sederhana di sekitar area wisata"
+    ],
+    "latitude": -0.88894,
+    "longitude": 119.85595,
+    "photo_url": "https://files.catbox.moe/mfo8lj.jpg"
+  },
+  {
+    "id": 10,
+    "name": "Bukit Wisata Edukasi",
+    "category": "Alam",
+    "description": "Bukit Wisata Edukasi merupakan destinasi di sekitar Kota Palu yang menggabungkan konsep rekreasi dan pembelajaran alam. Dari atas bukit ini, pengunjung dapat menikmati panorama indah Kota Palu sekaligus suasana sejuk perbukitan, sehingga cocok sebagai tempat bersantai sekaligus mengenal lingkungan sekitar.",
+    "address": "Jl. WIsata, Tondo",
+    "kecamatan": "Kec. Mantikulore",
+    "operating_hours": {
+      "type": "daily",
+      "start": "11:00",
+      "end": "22:00"
+    },
+    "price": {
+      "entry_fee": 0.0,
+      "parking_bike": 2000.0,
+      "parking_car": 2000.0,
+      "note": "Masuk area gratis. Biaya parkir disamakan."
+    },
+    "facilities": [
+      "Area parkir",
+      "Cafe",
+      "Area outdorr untuk pemandangan",
+      "Area duduk",
+      "Jalan akases ke perbukitan"
+    ],
+    "latitude": -0.85277,
+    "longitude": 119.90752,
+    "photo_url": "https://files.catbox.moe/bh7gig.jpg"
+  },
+  {
+    "id": 11,
+    "name": "Taman Taipa",
+    "category": "Taman",
+    "description": "Taman Taipa adalah ruang terbuka hijau di Kelurahan Taipa, Kecamatan Palu Utara, Kota Palu. Taman ini dibangun sebagai bagian dari program revitalisasi kota dan sebagai tempat publik bagi warga untuk bersantai, berjalan-jalan, melepas penat.",
+    "address": "Jl. Moh Amin, Taipa",
+    "kecamatan": "Kec. Palu Utara",
+    "operating_hours": {
+      "type": "24_hour"
+    },
+    "price": {
+      "entry_fee": 0.0,
+      "parking_bike": 0.0,
+      "parking_car": 0.0,
+      "note": "Gratis."
+    },
+    "facilities": [
+      "Area Parkir",
+      "Bangku Taman",
+      "Area bermain anak-anak",
+      "Fasilitas olahraga"
+    ],
+    "latitude": -0.777082,
+    "longitude": 119.863319,
+    "photo_url": "https://files.catbox.moe/imjg1x.jpg"
+  },
+  {
+    "id": 12,
+    "name": "Bukit Cinta",
+    "category": "Alam",
+    "description": "Bukit Cinta adalah destinasi wisata alam berupa bukit dengan spot pandang yang indah, cocok untuk melihat panorama, sunrise/sunset, dan foto-romantis. Udara di sekitar biasanya sejuk dan suasananya tenang, jauh dari keramaian kota.",
+    "address": "Jl. Jabal Nur (Dekat Bundaran STQ)",
+    "kecamatan": "Kec. Mantikulore",
+    "operating_hours": {
+      "type": "daily",
+      "start": "13:00",
+      "end": "23:00"
+    },
+    "price": {
+      "entry_fee": 0.0,
+      "parking_bike": 3000.0,
+      "parking_car": 3000.0,
+      "note": "Biaya parkir disamakan."
+    },
+    "facilities": [
+      "Area Parkir",
+      "Toilet Umum",
+      "Cafe",
+      "Spot Foto bersama pemandangan"
+    ],
+    "latitude": -0.870808,
+    "longitude": 119.885187,
+    "photo_url": "https://files.catbox.moe/39u9au.jpg"
+  },
+  {
+    "id": 13,
+    "name": "Pantai Duva",
+    "category": "Pantai",
+    "description": "Pantai Duva merupakan area wisata yang berada di mamboro, Sulawesi Tengah yang indah akan alam dan panorama laut.",
+    "address": "Jl. Trans Sulawesi, Mamboro",
+    "kecamatan": "Kec. Palu Utara",
+    "operating_hours": {
+      "type": "24_hour"
+    },
+    "price": {
+      "entry_fee": 0.0,
+      "parking_bike": 0.0,
+      "parking_car": 0.0,
+      "note": "Gratis."
+    },
+    "facilities": [
+      "Area Parkir",
+      "Spot Foto bersama pemandangan laut yang indah"
+    ],
+    "latitude": -0.81833,
+    "longitude": 119.87914,
+    "photo_url": "https://files.catbox.moe/gozqt5.png"
+  },
+  {
+    "id": 14,
+    "name": "Pantai Wisata Pantoloan",
+    "category": "Pantai",
+    "description": "Pantai Pantoloan di Palu adalah pantai yang menawarkan panorama alam yang memikat, di mana laut yang biru berkolaborasi dengan latar pegunungan di sekitarnya. Pasir pantainya berwarna netral, suasananya cenderung tenang, cocok untuk bersantai, bermain air, atau menikmati senja.",
+    "address": "Jl. Makagili Pantoloan",
+    "kecamatan": "Kec. Tawaeli",
+    "operating_hours": {
+      "type": "24_hour"
+    },
+    "price": {
+      "entry_fee": 0.0,
+      "parking_bike": 0.0,
+      "parking_car": 0.0,
+      "note": "Gratis."
+    },
+    "facilities": [
+      "Area Parkir",
+      "Spot Foto pemandangan"
+    ],
+    "latitude": -0.70911,
+    "longitude": 119.85158,
+    "photo_url": "https://files.catbox.moe/ppj910.jpg"
+  },
+  {
+    "id": 15,
+    "name": "Destinasi Wisata Sejarah Likuifaksi Petobo",
+    "category": "Budaya/Sejarah",
+    "description": "Destinasi Wisata Sejarah Likuifaksi Petobo terletak dikelurahan petobo, palu selatan, Sulawesi Tengah. Sebuah kawasan yang pernah menjadi titik terdampak parah gelombang likuifaksi akibat gempa 28 september 2018.",
+    "address": "Jl. Moh. Soeharto, Petobo",
+    "kecamatan": "Kec. Palu Selatan",
+    "operating_hours": {
+      "type": "24_hour"
+    },
+    "price": {
+      "entry_fee": 0.0,
+      "parking_bike": 0.0,
+      "parking_car": 0.0,
+      "note": "Gratis."
+    },
+    "facilities": [
+      "Ruang terbuka",
+      "Papan informasi",
+      "Ruang edukasi yang dapat dikunjungi"
+    ],
+    "latitude": -0.93811,
+    "longitude": 119.92028,
+    "photo_url": "https://files.catbox.moe/80wna7.jpg"
+  },
+  {
+    "id": 16,
+    "name": "Abdilah Garden",
+    "category": "Rekreasi",
+    "description": "Abdilah Garden adalah destinasi wisata alam dan kuliner di kelurahan kawatuna, kecamatan mantikulore, kota palu. Tempat ini cocok untuk keluarga, nongkrong santai dan spot foto.",
+    "address": "Kawatuna",
+    "kecamatan": "Kec. Mantikulore",
+    "operating_hours": {
+      "type": "daily",
+      "start": "09:00",
+      "end": "17:00"
+    },
+    "price": {
+      "entry_fee": 0.0,
+      "parking_bike": 3000.0,
+      "parking_car": 3000.0,
+      "note": "Masuk area gratis. Biaya parkir disamakan."
+    },
+    "facilities": [
+      "Area parkir",
+      "Toilet umum",
+      "Rumah makan dengan nuansa pedesaan",
+      "Gazebo",
+      "Taman bermain anak-anak",
+      "Area olahraga ringan seperti panahan"
+    ],
+    "latitude": -0.90078,
+    "longitude": 119.93036,
+    "photo_url": "https://files.catbox.moe/1u7avt.jpg"
+  },
+  {
+    "id": 17,
+    "name": "Tepi Laut",
+    "category": "Pantai",
+    "description": "Tepi Laut adalah tempat kuliner & rekreasi tepi pantai yang berlokasi di Jl. Yodo, Tawaeli, Kota Palu. Tempat ini memakai konsep suasana santai tepi laut. pengunjung bisa menikmati pemandangan laut, angin pantai, dan suasana sunset di sore hari.",
+    "address": "Jl. Yodo, Panau",
+    "kecamatan": "Kec. Tawaeli",
+    "operating_hours": {
+      "type": "daily",
+      "start": "11:00",
+      "end": "23:00"
+    },
+    "price": {
+      "entry_fee": 0.0,
+      "parking_bike": 3000.0,
+      "parking_car": 5000.0,
+      "note": "Masuk area gratis. Biaya parkir motor Rp 3.000, mobil Rp 5.000."
+    },
+    "facilities": [
+      "Area outdoor",
+      "Restoran/ cafe",
+      "Tempat duduk/gazebo",
+      "Spot foto",
+      "Area parkiran",
+      "Toilet umum"
+    ],
+    "latitude": -0.72752,
+    "longitude": 119.85637,
+    "photo_url": "https://files.catbox.moe/fpgntj.png"
+  },
+  {
+    "id": 18,
+    "name": "Taman Mbere Lasoani",
+    "category": "Taman",
+    "description": "Taman Mbere adalah taman kota yang terletak di Jalan Tekukur, Kelurahan Lasoani, Kota Palu. Taman ini memiliki suasana asri dan alami di lingkungan permukiman, dengan tanaman hijau dan udara yang cenderung lebih sejuk dibandingkan area padat kota.",
+    "address": "Jl. Tekukur, Lasoani",
+    "kecamatan": "Kec. Mantikulore",
+    "operating_hours": {
+      "type": "24_hour"
+    },
+    "price": {
+      "entry_fee": 0.0,
+      "parking_bike": 0.0,
+      "parking_car": 0.0,
+      "note": "Gratis."
+    },
+    "facilities": [
+      "Area parkiran",
+      "Area bermain anak-anak",
+      "Bangku taman",
+      "Spot foto"
+    ],
+    "latitude": -0.90281,
+    "longitude": 119.90863,
+    "photo_url": "https://files.catbox.moe/f7ja9e.jpg"
+  },
+  {
+    "id": 19,
+    "name": "Museum Sulteng",
+    "category": "Budaya/Sejarah",
+    "description": "Museum Sulawesi Tengah yang berlokasi di Jl. Kemiri No. 23, Kota Palu, merupakan museum umum yang menampilkan koleksi sejarah, budaya, dan alam khas Sulawesi Tengah. Museum ini menyimpan artefak megalitik, pakaian adat, kain tenun, alat musik tradisional, fosil, hingga keramik dan mata uang kuno. Selain menjadi pusat edukasi sejarah dan budaya, museum ini juga rutin mengadakan pameran khusus untuk mengenalkan kekayaan warisan lokal kepada masyarakat dan wisatawan.",
+    "address": "Jl. Kemiri No.23, Kamonji",
+    "kecamatan": "Kec. Palu Barat",
+    "operating_hours": {
+      "type": "weekday_only",
+      "start": "07:30",
+      "end": "16:00"
+    },
+    "price": {
+      "entry_fee": 5000.0,
+      "parking_bike": null,
+      "parking_car": null,
+      "note": "Buka hari Senin - Jumat."
+    },
+    "facilities": [
+      "Ruang pameran",
+      "Koleksi budaya dan sejarah",
+      "Taman dan area terbuka",
+      "Area parkiran",
+      "Toilet umum",
+      "Toko cendera mata"
+    ],
+    "latitude": -0.90239,
+    "longitude": 119.85386,
+    "photo_url": "https://files.catbox.moe/ozbasj.png"
+  },
+  {
+    "id": 20,
+    "name": "Mamboro Beach",
+    "category": "Pantai",
+    "description": "Mamboro Beach adalah pantai berpasir di pesisir utara Kota Palu yang terkenal dengan suasana tenang, air laut jernih, dan pemandangan matahari terbenam yang indah, cocok untuk bersantai, memancing, atau menikmati panorama Teluk Palu bersama keluarga.",
+    "address": "Jl. Uwe Pemata belakang RS madani, Mamboro",
+    "kecamatan": "Kec. Palu Utara",
+    "operating_hours": {
+      "type": "24_hour"
+    },
+    "price": {
+      "entry_fee": 0.0,
+      "parking_bike": 0.0,
+      "parking_car": 0.0,
+      "note": "Gratis."
+    },
+    "facilities": [
+      "Villa",
+      "Area camping",
+      "Spot foto sunset"
+    ],
+    "latitude": -0.79406,
+    "longitude": 119.86829,
+    "photo_url": "https://files.catbox.moe/Inno4i.png"
+  },
+  {
+    "id": 21,
+    "name": "Bukit Tondo",
+    "category": "Alam",
+    "description": "Bukit Tondo merupakan bukit yang terletah di sekitaran kelurahan tondo, yang berada di belakang bukit polda, mempunyai pemandangan yang sangat indah.",
+    "address": "Belakang bukit polda",
+    "kecamatan": "Kec. Mantikulore",
+    "operating_hours": {
+      "type": "24_hour"
+    },
+    "price": {
+      "entry_fee": 0.0,
+      "parking_bike": 0.0,
+      "parking_car": 0.0,
+      "note": "Gratis."
+    },
+    "facilities": [
+      "Spot foto",
+      "Pemandangan sunse",
+      "Ruang terbuka hijau"
+    ],
+    "latitude": -0.863311,
+    "longitude": 119.897115,
+    "photo_url": "https://files.catbox.moe/wakrse.jpg"
+  },
+  {
+    "id": 22,
+    "name": "Puri Vatutela",
+    "category": "Rekreasi",
+    "description": "Puri Vatutela adalah café & resto di area perbukitan Tondo, Palu, yang menawarkan suasana santai, pemandangan kota dan Teluk Palu dari ketinggian, cocok untuk nongkrong dan menikmati alam.",
+    "address": "Jl. DR. H. Andi Mattulada, Tondo",
+    "kecamatan": "Kec. Palu Timur",
+    "operating_hours": {
+      "type": "daily",
+      "start": "15:00",
+      "end": "23:00"
+    },
+    "price": {
+      "entry_fee": 5000.0,
+      "parking_bike": 0.0,
+      "parking_car": 0.0,
+      "note": "Biaya masuk Rp 5.000 per orang sudah termasuk biaya parkir."
+    },
+    "facilities": [
+      "Kolam renang",
+      "Area parkir",
+      "Spot foto",
+      "Cafe",
+      "Villa"
+    ],
+    "latitude": -0.84834,
+    "longitude": 119.91807,
+    "photo_url": "https://files.catbox.moe/hgs59e.jpg"
+  },
+  {
+    "id": 23,
+    "name": "Gedung Juang",
+    "category": "Budaya/Sejarah",
+    "description": "Gedung Juang Palu adalah bangunan bersejarah peninggalan Belanda tahun 1905 yang menjadi saksi serah terima kemerdekaan Sulawesi Tengah pada 16 Mei 1950, dengan arsitektur kolonial klasik yang masih terawat.",
+    "address": "Jl. Cempaka, Lolu Utara",
+    "kecamatan": "Kec. Palu Timur",
+    "operating_hours": {
+      "type": "weekday_only",
+      "start": "08:00",
+      "end": "17:00"
+    },
+    "price": {
+      "entry_fee": 0.0,
+      "parking_bike": 2000.0,
+      "parking_car": 2000.0,
+      "note": "Masuk gedung harus izin. Buka hari Senin - Jumat."
+    },
+    "facilities": [
+      "Area parkir",
+      "Toilet",
+      "Ruang pameran"
+    ],
+    "latitude": -0.89852,
+    "longitude": 119.87293,
+    "photo_url": "https://files.catbox.moe/g0mqbc.jpg"
+  },
+  {
+    "id": 24,
+    "name": "Paluabara Swimming Pool",
+    "category": "Rekreasi",
+    "description": "Kolam renang publik yang dikenal luas sebagai tempat berenang favorit warga Palu, khususnya anak muda dan keluarga. Lokasinya di Jl. Hang Tuah, Talise, Kecamatan Mantikulore, Kota Palu.",
+    "address": "Jl. Hang Tuah, Talise",
+    "kecamatan": "Kec. Mantikulore",
+    "operating_hours": {
+      "type": "daily",
+      "start": "07:30",
+      "end": "20:30"
+    },
+    "price": {
+      "entry_fee": 20000.0,
+      "parking_bike": null,
+      "parking_car": null,
+      "note": "Harga tiket Weekdays Rp 20.000 dan Weekend Rp 25.000. Parkir tidak spesifik."
+    },
+    "facilities": [
+      "Kolam renang",
+      "Kelas renang",
+      "Penyewaan alat renang",
+      "Cafe",
+      "Area parkir"
+    ],
+    "latitude": -0.87581,
+    "longitude": 119.88215,
+    "photo_url": "https://files.catbox.moe/911j0u.png"
+  },
+  {
+    "id": 25,
+    "name": "Puncak Salena",
+    "category": "Alam",
+    "description": "Puncak Salena adalah destinasi wisata alam di Palu yang menawarkan pemandangan indah dari ketinggian. Dari sini, pengunjung bisa melihat hamparan kota Palu, teluk, hingga pegunungan di sekitarnya. Suasananya sejuk, cocok untuk bersantai sekaligus menikmati matahari terbit maupun terbenam.",
+    "address": "Daerah buluri",
+    "kecamatan": "Kec. Palu Barat",
+    "operating_hours": {
+      "type": "daily",
+      "start": "08:00",
+      "end": "20:00"
+    },
+    "price": {
+      "entry_fee": 5000.0,
+      "parking_bike": 3000.0,
+      "parking_car": 3000.0,
+      "note": "Biaya parkir motor dan mobil disamakan."
+    },
+    "facilities": [
+      "Area parkir",
+      "Warung kecil",
+      "Toilet umum (masih terbatas)",
+      "Gazebo",
+      "Area camping",
+      "Spot foto sunrise dan sunset"
+    ],
+    "latitude": -0.84600,
+    "longitude": 119.79153,
+    "photo_url": "https://files.catbox.moe/1zvbxf.jpg"
+  },
+  {
+    "id": 26,
+    "name": "Spot Foto Sunset Dekat Islamic Center",
+    "category": "Taman",
+    "description": "Spot foto ini terletak di sekitar daerah mamboro, banyak spot spot yang bagus buat foto dan menikmati sunset dan indahnya laut.",
+    "address": "Jl. Kebonsari, Mamboro",
+    "kecamatan": "Kec. Palu Utara",
+    "operating_hours": {
+      "type": "24_hour"
+    },
+    "price": {
+      "entry_fee": 0.0,
+      "parking_bike": 3000.0,
+      "parking_car": 3000.0,
+      "note": "Masuk area gratis. Biaya parkir disamakan."
+    },
+    "facilities": [
+      "Mushola",
+      "Area parkir",
+      "Jajanan"
+    ],
+    "latitude": -0.80175,
+    "longitude": 119.87683,
+    "photo_url": "https://files.catbox.moe/1xngxi.jpg"
+  },
+  {
+    "id": 27,
+    "name": "Taipa Beach",
+    "category": "Pantai",
+    "description": "Taipa Beach adalah kawasan rekreasi pantai yang terletak di Kelurahan Tipa, Palu Utara, Sulawesi Tengah. Suasana cocok untuk bersantai bersama keluarga, menikmati pemandangan laut dan pegunungan, beraktivitas air seperti berenang atau watersport, serta foto-foto.",
+    "address": "Jl. Taipa Beach, Taipa",
+    "kecamatan": "Kec. Palu Utara",
+    "operating_hours": {
+      "type": "daily",
+      "start": "07:00",
+      "end": "19:00"
+    },
+    "price": {
+      "entry_fee": 30000.0,
+      "parking_bike": 0.0,
+      "parking_car": 0.0,
+      "note": "Biaya masuk sudah termasuk biaya parkir."
+    },
+    "facilities": [
+      "Villa",
+      "Penginapan",
+      "Resto",
+      "Permandian (kolam renang)",
+      "Security",
+      "Spot foto"
+    ],
+    "latitude": -0.78232,
+    "longitude": 119.86043,
+    "photo_url": "https://files.catbox.moe/j1wp10.jpg"
+  },
+  {
+    "id": 28,
+    "name": "Bukit Kawatuna",
+    "category": "Alam",
+    "description": "Bukit Kawatna merupakan salah satu destinasi wisata alam yang menawan dengan pemandangan perbukitan hijau dan udara yang sejuk. Dari puncaknya, pengunjung dapat menikmati panorama indah hamparan alam di sekitarnya, terutama saat matahari terbit atau terbenam yang menciptakan suasana tenang dan memukau. Tempat ini cocok untuk bersantai, berfoto, maupun sekadar melepas penat dari kesibukan sehari-hari. Keindahan alam yang masih asri menjadikan Bukit Kawatna sebagai spot favorit bagi wisatawan lokal maupun pecinta alam.",
+    "address": "Daerah Kawatuna",
+    "kecamatan": "Kec. Mantikulore",
+    "operating_hours": {
+      "type": "24_hour"
+    },
+    "price": {
+      "entry_fee": 0.0,
+      "parking_bike": 0.0,
+      "parking_car": 0.0,
+      "note": "Gratis."
+    },
+    "facilities": [
+      "Area Parkir",
+      "Spot foto bersama pemandangan"
+    ],
+    "latitude": -0.90093,
+    "longitude": 119.93154,
+    "photo_url": "https://files.catbox.moe/rk7uk4.png"
+  },
+  {
+    "id": 29,
+    "name": "Wisata Sate Mobil",
+    "category": "Rekreasi",
+    "description": "Wisata Sate Mobil merupakan destinasi unik yang menawarkan pengalaman kuliner sekaligus rekreasi santai. Tempat ini terkenal dengan sajian sate khasnya yang lezat, disajikan langsung dari mobil yang dimodifikasi menjadi tempat jualan menarik. Selain menikmati makanan, pengunjung juga dapat bersantai di area sekitar yang nyaman dan instagramable, cocok untuk berkumpul bersama teman atau keluarga. Konsepnya yang kreatif dan suasana yang santai membuat Wisata Sate Mobil menjadi salah satu spot favorit bagi anak muda dan wisatawan yang mencari suasana baru.",
+    "address": "Jl. Uwenompu, Donggala Kodi",
+    "kecamatan": "Kec. Ulujadi",
+    "operating_hours": {
+      "type": "daily",
+      "start": "10:00",
+      "end": "23:00"
+    },
+    "price": {
+      "entry_fee": 10000.0,
+      "parking_bike": 5000.0,
+      "parking_car": 10000.0,
+      "note": "Masuk area Rp 10.000 per orang."
+    },
+    "facilities": [
+      "Area parkir",
+      "Toilet umum",
+      "Cafe",
+      "Spot foto"
+    ],
+    "latitude": -0.89972,
+    "longitude": 119.82978,
+    "photo_url": "https://files.catbox.moe/pjx06w.jpg"
+  },
+  {
+    "id": 30,
+    "name": "Taman Nasional Hassanudin",
+    "category": "Taman",
+    "description": "Taman nasional hassanudin salah satu ruang publik ikonik di Kota Palu yang terletak di kawasan strategis pusat kota. Taman ini menjadi tempat favorit warga untuk bersantai, berolahraga, maupun menikmati suasana sore hari. Di tengahnya terdapat patung Jenderal Hasanuddin yang menjadi simbol semangat kepahlawanan dan perjuangan rakyat Sulawesi. Area taman yang tertata rapi dengan pepohonan rindang dan pencahayaan malam yang indah menjadikannya spot populer untuk berfoto maupun berkumpul bersama keluarga. Selain sebagai tempat rekreasi, Taman nasional Hasanuddin juga sering menjadi lokasi berbagai kegiatan masyarakat dan acara kota.",
+    "address": "Jl. Sultan Hasanuddin",
+    "kecamatan": "Kec. Palu Timur",
+    "operating_hours": {
+      "type": "24_hour"
+    },
+    "price": {
+      "entry_fee": 0.0,
+      "parking_bike": 2000.0,
+      "parking_car": 2000.0,
+      "note": "Biaya parkir motor/mobil disamakan."
+    },
+    "facilities": [
+      "Area parkir",
+      "Track jogging",
+      "Spot foto",
+      "Bangku taman"
+    ],
+    "latitude": -0.89907,
+    "longitude": 119.87245,
+    "photo_url": "https://files.catbox.moe/lyh4to.jpg"
+  }
+]
