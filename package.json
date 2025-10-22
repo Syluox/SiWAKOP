@@ -2,7 +2,6 @@
   "name": "siwisata",
   "private": true,
   "version": "0.0.0",
-  
   "type": "module",
   "scripts": {
     "dev": "concurrently --names \"FRONT, BACK\" -c \"blue,green\" \"npm run dev --prefix frontend\" \"npm run start --prefix backend\"",
@@ -16,6 +15,7 @@
     "dotenv": "^17.2.3",
     "express": "^5.1.0",
     "leaflet": "^1.9.4",
+    "leaflet-routing-machine": "^3.2.12",
     "mongodb": "^6.20.0",
     "mongoose": "^8.19.1",
     "react": "^19.1.1",

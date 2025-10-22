@@ -1,0 +1,39 @@
+/* PlaceDetail.css */
+.place-detail {
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.place-image {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.description {
+  margin-bottom: 20px;
+}
+
+.map-section {
+  margin-bottom: 20px;
+}
+
+.reviews-section .review {
+  border-bottom: 1px solid #ddd;
+  padding: 10px 0;
+}
+
+.back-btn {
+  display: block;
+  text-align: center;
+  margin-top: 20px;
+  color: blue;
+}
+
+@media (max-width: 768px) {
+  .place-detail {
+    padding: 10px;
+  }
+}

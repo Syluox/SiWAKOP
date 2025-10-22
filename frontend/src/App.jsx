@@ -15,10 +15,12 @@ import ExploreSection from "./section/explore";
 import RecommendSection from "./section/recomend";
 import MapSection from "./section/mapSection";
 
+
 // Page Export
 import UserPage from "./pages/UserPage.jsx";
 import AdminDashboard from "./pages/AdminDashboard.jsx";
 import { UserControler } from "./usesrHandle.jsx";
+import PlaceDetail from "./pages/PlaceDetail.jsx"
 
 
 function App() {
@@ -267,7 +269,9 @@ function App() {
       <Routes>
         <Route path="/admin" element={<AdminDashboard />} /> 
       </Routes>
-
+      <Routes>
+        <Route path="/detail/:id" element={<PlaceDetail/>}/>
+      </Routes>
     </>
   );
 }

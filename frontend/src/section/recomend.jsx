@@ -1,13 +1,24 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom"; // Only need useNavigate
 import "../App.css";
 import "./recomend.css";
+// import PlaceDetail from "../pages/PlaceDetail"; // Not needed here
 
 function RecommendSection() {
     const [places, setPlaces] = useState([]);
     const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+
+    const navigate = useNavigate();
+
+    // 1. Accept the ID as an argument
+    const handleDetailClick = (placeId) => {
+        // 2. Construct the final URL using template literals
+        // If your route is /detail/:id, the URL should be /detail/12345
+        navigate(`/detail/${placeId}`); 
+    }
 
     // Handle window resize for responsive design
     useEffect(() => {
@@ -65,6 +76,7 @@ function RecommendSection() {
         );
     }
 
+
     return (
         <section id="recommend">
             <div className="container">
@@ -95,7 +107,13 @@ function RecommendSection() {
                                 </p>
                                 <div className="recom-footer">
                                     <span className="recom-location">{place.kecamatan}</span>
-                                    <a className="about-cta explore-cta">Learn More →</a>
+                                    {/* 3. Call the function with the specific place ID */}
+                                    <button 
+                                        className="about-cta explore-cta" 
+                                        onClick={() => handleDetailClick(place._id)}
+                                    >
+                                        Learn More →
+                                    </button>
                                 </div>
                             </div>
                         </div>
