@@ -43,7 +43,7 @@ export const greetings = [
 ];
 
 import React, { useState, useEffect } from 'react';
-import './App.css';
+import '../style/App.css';
 
 export function TypingGreeting({ typingSpeed = 100, deletingSpeed = 50, pause = 1000 }) {
   const [displayText, setDisplayText] = useState('');

@@ -4,10 +4,19 @@
         "dev": "vite --host"
     },
     "dependencies": {
+        "@tailwindcss/postcss": "^4.1.17",
+        "@tailwindcss/vite": "^4.1.17",
         "axios": "^1.12.2",
         "leaflet": "^1.9.4",
+        "lucide-react": "^0.555.0",
+        "npmrc": "^1.1.1",
         "ol": "^10.6.1",
         "react-leaflet": "^5.0.0",
         "react-router-dom": "^7.9.4"
+    },
+    "devDependencies": {
+        "autoprefixer": "^10.4.22",
+        "postcss": "^8.5.6",
+        "tailwindcss": "^4.1.17"
     }
 }

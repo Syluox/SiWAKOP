@@ -1,6 +1,6 @@
 .map-section {
     padding: 50px 0;
-    background-color: #f5f5f5;
+    background-color: var(--color-gray-dark);
 }
 
 .map-section .container {
@@ -11,19 +11,16 @@
 
 .map-section .main-text {
     text-align: center;
-    margin-bottom: 30px;
 }
 
 .map-section .main-text h1 {
     font-size: 2.5rem;
-    margin-bottom: 15px;
-    color: #333;
+    color: #ffffff;
 }
 
 .map-section .main-text p {
     font-size: 1.2rem;
-    color: #666;
-    margin-bottom: 30px;
+    color: #ffffff;
 }
 
 .map-container {
@@ -95,17 +92,17 @@
     font-size: 1.2rem;
     font-weight: bold;
     margin-bottom: 5px;
-    color: #333;
+    color: #ffffff;
 }
 
 .popup-category {
-    color: #666;
+    color: #ffffff;
     font-size: 0.9rem;
     margin-bottom: 10px;
 }
 
 .popup-description {
-    color: #444;
+    color: #ffffff;
     margin-bottom: 15px;
     font-size: 0.95rem;
     line-height: 1.4;
@@ -147,7 +144,7 @@
     border: none;
     background: none;
     font-size: 1.2rem;
-    color: #666;
+    color: #ffffff;
     cursor: pointer;
     padding: 5px;
 }

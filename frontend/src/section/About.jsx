@@ -1,8 +1,8 @@
-import React from "react";
+import React,{forwardRef} from "react";
 
-const About = () => {
+const About = forwardRef((props, ref)   => {
   return (
-    <section id="about" className="about-section">
+    <section ref={ref} id="about" className="about-section">
       <div className="container about-container">
         <div className="about-card">
           <div className="about-image" aria-hidden>
@@ -10,18 +10,20 @@ const About = () => {
           </div>
 
           <div className="about-content">
-            <h1>About SiWAKOPs</h1>
+            <h1>Tentang SiWAKOP</h1>
             <p>
-              SiWAKOPs membantu Anda menemukan tempat-tempat menarik di Palu dan sekitarnya. Kami
+              SiWAKOP membantu Anda menemukan tempat-tempat menarik di Palu dan sekitarnya. Kami
               merangkum rekomendasi, lokasi, dan tips agar perjalanan Anda lebih mudah dan
               menyenangkan.
             </p>
-            <a className="about-cta" href="#">Learn more →</a>
           </div>
         </div>
       </div>
+      <div className="made-by-text">
+        2025 SiWAKOP. All rights reserved. <span className="made-by-text">Purity made by <a target="_blank" href="https://www.instagram.com/hakabatsu_" iges=" - Instagram">@Hakabatsu</a></span>
+      </div>
     </section>
   );
-};
+});
 
 export default About;

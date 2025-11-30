@@ -1,186 +1,109 @@
-import { useEffect, useState } from 'react';
-import axios from 'axios';
-import { useParams, Link } from 'react-router-dom';
-// Import the necessary hook from react-leaflet
-import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
-import L from 'leaflet';
-import 'leaflet/dist/leaflet.css';
-import 'leaflet-routing-machine'; 
-import 'leaflet-routing-machine/dist/leaflet-routing-machine.css';
-import './PlaceDetail.css';
+import React from 'react';
 
-// Fix Leaflet marker icon
-delete L.Icon.Default.prototype._getIconUrl;
-L.Icon.Default.mergeOptions({
-  iconRetinaUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon-2x.png',
-  iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png',
-  shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png'
-});
+// This functional component is designed to render a single tourism place item.
+// It assumes it receives a 'place' object prop matching the MySQL table structure.
+const PlaceCard = ({ place }) => {
+  // Ensure JSON fields are parsed, as they are stored as strings in MySQL
+  const operatingHours = place?.operating_hours ? JSON.parse(place.operating_hours) : {};
+  const facilities = place?.facilities ? JSON.parse(place.facilities) : [];
 
-
-// --- NEW COMPONENT FOR ROUTING ---
-const RoutingMachine = ({ userLocation, place }) => {
-    // 1. Get the Leaflet map instance using useMap()
-    const map = useMap(); 
-
-    // 2. Use useEffect to run Leaflet side effects once
-    useEffect(() => {
-        if (!map || !userLocation || !place) return;
-
-        // 3. Initialize the routing control
-        const routingControl = L.Routing.control({
-            waypoints: [
-                L.latLng(userLocation[0], userLocation[1]),
-                L.latLng(place.latitude, place.longitude)
-            ],
-            // You can customize the router and appearance here
-            routeWhileDragging: true,
-            showAlternatives: false,
-            // You can remove the default itinerary panel if you want
-            // show: false, 
-            // itineraryToogle: false, 
-        }).addTo(map);
-
-        // Optional: Clean up the control when the component unmounts
-        return () => {
-            map.removeControl(routingControl);
-        };
-    }, [map, userLocation, place]); // Re-run if location or place changes
-
-    return null; // This component doesn't render any visible DOM elements
-};
-// ------------------------------------
-
-
-const PlaceDetail = () => {
-  const { id } = useParams();
-  const [place, setPlace] = useState(null);
-  const [userLocation, setUserLocation] = useState(null);
-  const [distance, setDistance] = useState(null);
-  const [travelTime, setTravelTime] = useState(null);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    // Fetch place details
-    axios.get(`http://localhost:5000/api/places/${id}`)
-      .then(res => setPlace(res.data))
-      .catch(err => setError('Error fetching place details'));
-
-    // Get user location for directions
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        pos => setUserLocation([pos.coords.latitude, pos.coords.longitude]),
-        err => setError('Unable to get location')
-      );
-    } else {
-      setError('Geolocation not supported');
-    }
-  }, [id]);
-
-  // Calculate distance (Haversine formula) - No change needed
-  const calculateDistance = (lat1, lon1, lat2, lon2) => {
-    const R = 6371; // Earth radius in km
-    const dLat = (lat2 - lat1) * (Math.PI / 180);
-    const dLon = (lon2 - lon1) * (Math.PI / 180);
-    const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-              Math.cos(lat1 * (Math.PI / 180)) * Math.cos(lat2 * (Math.PI / 180)) *
-              Math.sin(dLon / 2) * Math.sin(dLon / 2);
-    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-    return R * c; // Distance in km
+  // Helper function for title case, for better presentation
+  const toTitleCase = (str) => {
+    if (!str) return '';
+    return str.replace(/\b\w/g, char => char.toUpperCase());
   };
 
-  // Estimate travel time - No change needed
-  const estimateTravelTime = (dist) => {
-    const hours = dist / 50; // Assume average speed
-    return `${Math.floor(hours)}h ${Math.round((hours % 1) * 60)}m`;
-  };
+  const statusText = operatingHours.type === '24_hour' 
+    ? 'Open 24 Hours' 
+    : 'Hours available';
 
-  useEffect(() => {
-    if (place && userLocation) {
-      const dist = calculateDistance(userLocation[0], userLocation[1], place.latitude, place.longitude);
-      setDistance(dist.toFixed(2));
-      setTravelTime(estimateTravelTime(dist));
-    }
-  }, [place, userLocation]);
-
-  // Parse operating hours - No change needed
-  const getClosingTime = () => {
-    const { type, end } = place.operating_hours;
-    if (type === '24_hour') return 'Open 24/7';
-    return `Closes at ${end}`;
-  };
-
-  if (error) return <p>{error}</p>;
-  if (!place) return <p>Loading...</p>;
-
-  // Ensure place has lat/lng data before rendering the map
-  if (!place.latitude || !place.longitude) {
-    return <p>Place data is incomplete (missing coordinates).</p>
-  }
+  const statusColor = operatingHours.type === '24_hour' 
+    ? 'bg-green-100 text-green-800' 
+    : 'bg-yellow-100 text-yellow-800';
 
   return (
-    <div className="place-detail">
-      <h1>{place.name}</h1>
-      {/* Check if photo_url is not null/empty to avoid src error */}
-      {place.photo_url && <img src={place.photo_url} alt={place.name} className="place-image" />}
-      
-      <p className="description">{place.description}</p>
-      <p>Category: **{place.category}**</p>
-      <p>Address: {place.address}, {place.kecamatan}</p>
-      <p>Facilities: **{place.facilities.join(', ')}**</p>
-      <p>Operating Hours: **{getClosingTime()}**</p>
-      <p>Price:</p>
-      <ul>
-        <li>Entry Fee: **${place.price.entry_fee}**</li>
-        <li>Parking Bike: **${place.price.parking_bike}**</li>
-        <li>Parking Car: **${place.price.parking_car}**</li>
-        <li>Note: {place.price.note}</li>
-      </ul>
+    <div className="max-w-sm mx-auto bg-white rounded-xl shadow-2xl overflow-hidden md:max-w-lg transition duration-300 hover:shadow-3xl transform hover:-translate-y-1">
+      {/* Image Placeholder or Actual Image */}
+      <div className="h-48 overflow-hidden">
+        <img 
+          className="w-full h-full object-cover" 
+          src={place?.photo_url || `https://placehold.co/600x400/1e293b/ffffff?text=${encodeURIComponent(place?.name || 'No Image')}`} 
+          alt={place?.name || "Tourism Place"}
+          onError={(e) => { e.target.onerror = null; e.target.src="https://placehold.co/600x400/1e293b/ffffff?text=Image+Not+Found"; }}
+        />
+      </div>
 
-      {/* --- UPDATED MAP SECTION --- */}
-      <section className="map-section">
-        <h2>Map & Directions</h2>
-        {/* Render MapContainer only if place coordinates exist */}
-        <MapContainer 
-            center={[place.latitude, place.longitude]} 
-            zoom={13} 
-            style={{ height: '400px' }}
-        >
-            <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-            
-            <Marker position={[place.latitude, place.longitude]}>
-                <Popup>{place.name}</Popup>
-            </Marker>
-            
-            {/* 4. Conditionally render the new RoutingMachine component */}
-            {userLocation && (
-                <RoutingMachine userLocation={userLocation} place={place} />
-            )}
-        </MapContainer>
-        {distance && <p>Distance: **{distance} km** | Estimated Time: **{travelTime}**</p>}
-      </section>
-      {/* --- END UPDATED MAP SECTION --- */}
-
-      <section className="reviews-section">
-        <h2>Reviews</h2>
-        {place.reviews.map((r, i) => (
-          <div key={i} className="review">
-            <p>Rating: **{r.rating} / 5**</p>
-            <p>{r.comment}</p>
-            <p>By: {r.user.username} on {new Date(r.date).toLocaleDateString()}</p>
+      <div className="p-6">
+        <div className="flex justify-between items-start">
+          <div className="uppercase tracking-wide text-sm text-indigo-500 font-semibold">
+            {toTitleCase(place?.category)}
           </div>
-        ))}
-        {place.reviews.length === 0 && <p>No reviews yet.</p>}
-      </section>
+          <span className={`px-3 py-1 text-xs font-medium rounded-full ${statusColor}`}>
+            {statusText}
+          </span>
+        </div>
+        
+        <h1 className="block mt-1 text-2xl leading-tight font-extrabold text-gray-900">
+          {place?.name}
+        </h1>
+        
+        <p className="mt-2 text-gray-500 line-clamp-3">
+          {place?.description}
+        </p>
 
-      <section className="documentation-section">
-        <h2>Documentation</h2>
-        <p>{place.document || 'No documentation available'}</p>
-      </section>
+        <div className="mt-4 border-t pt-4">
+          <p className="text-gray-600 font-medium">Location:</p>
+          <p className="text-sm text-gray-700">{place?.address}, {toTitleCase(place?.kecamatan)}</p>
+        </div>
 
-      <Link to="/" className="back-btn">Back to Recommendations</Link>
+        {facilities.length > 0 && (
+          <div className="mt-4">
+            <p className="text-gray-600 font-medium mb-2">Key Facilities:</p>
+            <div className="flex flex-wrap gap-2">
+              {facilities.slice(0, 3).map((facility, index) => (
+                <span 
+                  key={index} 
+                  className="px-3 py-1 text-xs rounded-full bg-gray-200 text-gray-700"
+                >
+                  {facility}
+                </span>
+              ))}
+              {facilities.length > 3 && (
+                 <span className="px-3 py-1 text-xs rounded-full bg-gray-300 text-gray-700">
+                   +{facilities.length - 3} more
+                 </span>
+              )}
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 };
 
-export default PlaceDetail;
+// Example usage to make the file runnable:
+const App = () => {
+    // Mock data structure matching the data retrieved from MySQL
+    const mockPlace = {
+        id: 1,
+        name: "Pantai Kamnel",
+        category: "pantai",
+        description: "Pantai Kamnel is a beautiful beach offering views of the Gawalise mountains and stunning sunsets. It's a popular spot for locals.",
+        address: "Jl kaombona, talise",
+        kecamatan: "mantikulore",
+        operating_hours: '{"type": "24_hour"}',
+        price: '{"entry_fee": 0.0, "parking_bike": 2000.0}',
+        facilities: '["Area parkir", "Toilet umum", "Cafe", "Spot foto", "Warung Kuliner"]',
+        latitude: -0.89972,
+        longitude: 119.82978,
+        photo_url: "https://files.catbox.moe/pjx06w.jpg"
+    };
+
+    return (
+        <div className="min-h-screen bg-gray-100 p-8 flex items-center justify-center">
+            <PlaceCard place={mockPlace} />
+        </div>
+    );
+}
+
+export default App;

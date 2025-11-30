@@ -1,0 +1,11 @@
+@media (min-width: 900px) {
+  .explore-item {
+    display: flex;
+  }
+  .explore-item .about-image {
+    width: 40%;
+  }
+  .explore-item .about-content {
+    width: 60%;
+  }
+}

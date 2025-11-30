@@ -1,8 +1,12 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom"; // Only need useNavigate
-import "../App.css";
+import "../style/App.css";
 import "./recomend.css";
+import "../style/Media_768.css";
+
+
+
 // import PlaceDetail from "../pages/PlaceDetail"; // Not needed here
 
 function RecommendSection() {
@@ -35,7 +39,7 @@ function RecommendSection() {
         const fetchPlaces = async () => {
             setLoading(true);
             try {
-                const response = await axios.get('http://localhost:5000/api/places/rand');
+                const response = await axios.get('http://localhost:5000/api/places/');
                 const data = response.data;
                 console.log('Fetched recommended places:', data);
                 // If on mobile, only take 4 places
