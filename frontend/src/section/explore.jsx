@@ -1,5 +1,7 @@
-import React, { useState, useEffect, forwardRef, useMemo } from "react";
+import React, { useState, useEffect, forwardRef, useMemo, useCallback } from "react";
 import "../style/App.css";
+
+import axios from "axios";
 
 //===============================================
 // CONSTANTS
@@ -9,32 +11,23 @@ const MOBILE_BREAKPOINT = 768;
 
 
 //===============================================
-// DUMMY DATA FOR PLACES
+// DUMMY DATA (Used as initial state and reference)
 //===============================================
-const placeData = {
-    // I assumed you have data for all card IDs 1, 2, 3, and 4
-    1: [
-        { _id: 101, name: "Pantai Talise", category: "Pantai", description: "Pemandangan teluk Palu yang ikonik, sempurna untuk sunset.", photo_url: "/dum-img.jpg" },
-        { _id: 102, name: "Pegunungan Gawalise", category: "Gunung", description: "Tujuan hiking populer dengan pemandangan kota dari ketinggian.", photo_url: "/dum-img.jpg" },
-        { _id: 201, name: "Palu Grand Mall", category: "Pusat Perbelanjaan", description: "Mall terbesar di kota Palu dengan bioskop dan restoran.", photo_url: "/dum-img.jpg" },
-        { _id: 202, name: "Waterboom Palu", category: "Rekreasi Air", description: "Taman air keluarga yang cocok untuk bersantai.", photo_url: "/dum-img.jpg" }
-    ],
-    2: [{ _id: 201, name: "Palu Grand Mall", category: "Pusat Perbelanjaan", description: "Mall terbesar di kota Palu dengan bioskop dan restoran.", photo_url: "/dum-img.jpg" }],
-    3: [{ _id: 301, name: "Taman GOR", category: "Taman Kota", description: "Taman populer untuk olahraga dan rekreasi.", photo_url: "/dum-img.jpg" }],
-    4: [{ _id: 401, name: "Makam Raja", category: "Situs Sejarah", description: "Situs bersejarah makam raja-raja Palu.", photo_url: "/dum-img.jpg" }]
-};
+// ❌ REMOVED: initialPlaceData (The component will start with an empty array)
 
 const cardDataList = [
-    { id: 1, title: "Pemandangan", description: "Nikmati pemandangan indah di kota Palu dan sekitarnya...", details: "Pemandangan Palu meliputi Pantai Talise..." },
-    { id: 2, title: "Hiburan", description: "Temukan berbagai pusat hiburan dan rekreasi yang seru...", details: "Pilihan hiburan termasuk mall-mall besar..." },
-    { id: 3, title: "Taman", description: "Jelajahi taman-taman kota yang hijau dan asri...", details: "Taman GOR dan Taman Kota Palu menjadi pilihan utama..." },
-    { id: 4, title: "Lainnya", description: "Beragam destinasi unik lainnya yang patut dikunjungi...", details: "Jelajahi situs sejarah seperti makam raja-raja Palu..." },
+    // 💡 Added a 'category' key to map card IDs to specific categories if needed later. 
+    // For now, we'll map the ID (1, 2, 3, 4) to the fetched data.
+    { id: 1, title: "Pemandangan", category: "Alam", description: "Nikmati pemandangan indah di kota Palu dan sekitarnya...", details: "Pemandangan Palu meliputi Pantai Talise..." },
+    { id: 2, title: "Hiburan", category: "Hiburan", description: "Temukan berbagai pusat hiburan dan rekreasi yang seru...", details: "Pilihan hiburan termasuk mall-mall besar..." },
+    { id: 3, title: "Taman", category: "Taman", description: "Jelajahi taman-taman kota yang hijau dan asri...", details: "Taman GOR dan Taman Kota Palu menjadi pilihan utama..." },
+    { id: 4, title: "Lainnya", category: "Lainnya", description: "Beragam destinasi unik lainnya yang patut dikunjungi...", details: "Jelajahi situs sejarah seperti makam raja-raja Palu..." },
 ];
 //===============================================
 
 
 //===============================================
-// HELPER FUNCTIONS
+// HELPER FUNCTIONS (No change)
 //===============================================
 const chunkArray = (arr, size) => {
     if (!arr) return [];
@@ -62,51 +55,76 @@ const ExploreSection = forwardRef(({ requestedCardId, setRequestedCardId }, ref)
     const [isVisible, setIsVisible] = useState(true); 
     const [lastCardYPosition, setLastCardYPosition] = useState(0);
 
+    // 💡 CHANGED: Initialize placesData to an empty ARRAY, not an object.
+    const [placesData, setPlacesData] = useState([]); 
+    const [isLoading, setIsLoading] = useState(true);
+
     const cardData = useMemo(() => cardDataList, []);
     //=============================================
 
-    // ... (EFFECT: HANDLE RESIZE remains the same) ...
+    //=============================================
+    // EFFECT: HANDLE RESIZE 💻
+    //=============================================
+    useEffect(() => {
+        const handleResize = () => {
+            setIsMobile(window.innerWidth <= MOBILE_BREAKPOINT);
+        };
+
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+    //=============================================
 
     //=============================================
-    // EFFECT: HANDLE MENU REQUESTED EXPANSION 💡
+    // DATA FETCHING 🌐
+    //=============================================
+    const fetchPlaces = useCallback(async () => {
+        setIsLoading(true);
+        try {
+            const response = await axios.get('http://localhost:5000/api/places/');
+            
+            // 💡 STORE RAW ARRAY: Store the raw array of places.
+            setPlacesData(response.data);
+            
+        } catch (error) {
+            console.error('Error fetching places for explore section:', error);
+        } finally {
+            setIsLoading(false);
+        }
+    }, []);
+
+    useEffect(() => {
+        fetchPlaces();
+    }, [fetchPlaces]);
+    //=============================================
+
+    //=============================================
+    // EFFECT: HANDLE MENU REQUESTED EXPANSION (No change)
     //=============================================
     useEffect(() => {
         if (requestedCardId !== null) {
             
-            // Scenario 1: Section is currently closed (expandedCardId === null)
             if (expandedCardId === null) {
-                // 1. Initiate fade out of the main grid
+                // Scenario 1: Closed -> Open
                 setIsVisible(false);
-                
-                // 2. Wait for the fade-out, then swap component and fade in
                 setTimeout(() => {
                     setExpandedCardId(requestedCardId);
                     setIsVisible(true);
                     setRequestedCardId(null); 
-                    // Scroll action was handled by App.js
                 }, TRANSITION_DURATION); 
 
-            // 🌟 Scenario 2: Section is ALREADY OPEN (expandedCardId !== null)
             } else if (expandedCardId !== requestedCardId) {
-                // Skip the fade-out/scroll sequence, just change content immediately
-                
-                // 1. Initiate quick fade out of expanded content
+                // Scenario 2: Open -> Switch Content
                 setIsVisible(false);
-
-                // 2. Wait a short time to show the transition effect
                 setTimeout(() => {
-                    // 3. Immediately change the expanded content ID
                     setExpandedCardId(requestedCardId);
-                    
-                    // 4. Initiate fade in of the new content
                     setIsVisible(true);
                     setRequestedCardId(null);
-                    
-                    // The view is already scrolled to the top, so no need to scroll again
-                }, TRANSITION_DURATION / 2); // Use half duration for faster switching
+                }, TRANSITION_DURATION / 2); 
+
             } else {
-                // Case: requestedCardId === expandedCardId (user clicked the already active item)
-                handleBackClick(); // Close the expanded view
+                // Case: Already open, clicking same item
+                handleBackClick(); 
                 setRequestedCardId(null);
             }
         }
@@ -115,28 +133,21 @@ const ExploreSection = forwardRef(({ requestedCardId, setRequestedCardId }, ref)
     
     
     //=============================================
-    // HANDLERS: INTERNAL CARD NAVIGATION
+    // HANDLERS: INTERNAL CARD NAVIGATION (No change)
     //=============================================
     
     const handleCardClick = (id, targetElement) => {
-        // ... (Logic remains the same: store position, fade out, set expandedId, scroll to top, fade in) ...
-        
-        // 1. Store the scroll position for returning later
         if (targetElement) {
             setLastCardYPosition(targetElement.offsetTop);
         } else {
             setLastCardYPosition(window.scrollY);
         }
         
-        // 2. Initiate fade out
         setIsVisible(false); 
 
-        // 3. Wait for the transition
         setTimeout(() => {
-            // Change state to render expanded view
             setExpandedCardId(id);
             
-            // Scroll the entire section into view
             if (ref.current) {
                 ref.current.scrollIntoView({ 
                     behavior: 'smooth', 
@@ -146,30 +157,21 @@ const ExploreSection = forwardRef(({ requestedCardId, setRequestedCardId }, ref)
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             }
             
-            // 4. Initiate fade in
             setIsVisible(true);
         }, TRANSITION_DURATION); 
     };
 
     const handleBackClick = () => {
-        // ... (Logic remains the same: fade out, set expandedId=null, scroll back, fade in) ...
-        
-        // 1. Initiate fade out
         setIsVisible(false);
         
-        // 2. Wait for the transition
         setTimeout(() => {
-            // Change state back to render explore section
             setExpandedCardId(null);
             
-            // Scroll back to the original card's position
             ref.current?.scrollIntoView({ 
                 behavior: 'smooth', 
                 block: 'start' 
             });
-           
-
-            // 3. Initiate fade in
+            
             setIsVisible(true);
         }, TRANSITION_DURATION); 
     };
@@ -177,18 +179,22 @@ const ExploreSection = forwardRef(({ requestedCardId, setRequestedCardId }, ref)
 
 
     //=============================================
-    // RENDER METHODS (No structural change needed here)
+    // RENDER METHODS 🖼️
     //=============================================
 
     const renderExpandedView = () => {
         const expandedData = cardData.find((data) => data.id === expandedCardId);
         
         if (!expandedData) {
-            // If data is missing for the expanded ID, go back
             return handleBackClick();
         }
 
-        const places = placeData[expandedCardId] || []; 
+        // 💡 NEW LOGIC: Filter the full placesData array based on the category name
+        // We assume the place object has a 'category' field matching 'expandedData.category'
+        const places = placesData.filter(place => 
+            place.category === expandedData.category
+        ) || [];
+        
         const chunkedPlaces = chunkArray(places, 2); 
 
         return (
@@ -198,13 +204,19 @@ const ExploreSection = forwardRef(({ requestedCardId, setRequestedCardId }, ref)
                 className={`expanded-detail-view ${isVisible ? 'transition-fade-in' : ''}`}
             >
                 <div className="container">
-                    {/* EXPANDED CONTENT (Rendering logic remains the same) */}
+                    
+                    {/* Loading & Empty State */}
+                    {isLoading && <p className="text-center py-8">Memuat tempat-tempat...</p>}
+                    {!isLoading && places.length === 0 && <p className="text-center py-8">Tidak ada tempat ditemukan untuk kategori {expandedData.category}.</p>}
+
                     <div className="expanded-card">
                         <div className="expanded-image"></div>
                         <div className="expanded-content">
-                            <h1 >{expandedData.title.toUpperCase()}</h1>
-                            {chunkedPlaces.map((row, rowIndex) => (
-                                <div key={rowIndex} className="explore-grid-row"> 
+                            <h1>{expandedData.title.toUpperCase()}</h1>
+                            
+                            {/* Render Chunked Places */}
+                            {!isLoading && chunkedPlaces.map((row, rowIndex) => (
+                                <div key={rowIndex} className="explore-grid-row grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4"> 
                                     {row.map((place) => (
                                         <div key={place._id} className="explore-item-card">
                                             <div className="explore-item-image">
@@ -234,7 +246,7 @@ const ExploreSection = forwardRef(({ requestedCardId, setRequestedCardId }, ref)
                             ))}
                         </div>
                     </div>
-                                         
+                    
                     <div className="expand-end-button">
                         <div href="#" className="back-button expanded-back-button" onClick={(e) => {
                             e.preventDefault();
@@ -252,7 +264,6 @@ const ExploreSection = forwardRef(({ requestedCardId, setRequestedCardId }, ref)
     }
     
     const renderExploreSection = () => {
-        // ... (Logic remains the same) ...
         return(
             <section 
                 ref={ref} 
