@@ -8,6 +8,7 @@ const TABLE_NAME = 'tempat';
 router.use((req, res, next) => {
     // Ensure the database connection is available before proceeding
     if (!req.app.locals.db) {
+        // HTTP 503 Service Unavailable is the correct status for a dependency failure
         return res.status(503).json({ 
             message: 'Database service unavailable. Server starting up.' 
         });
@@ -21,14 +22,11 @@ router.use((req, res, next) => {
 router.get('/', async (req, res) => {
     const db = req.app.locals.db;
     try {
-        // SELECT all columns from the tourism_places table
         const sql = `SELECT * FROM ${TABLE_NAME}`;
         
-        // Use db.query, which has been promisified in server.js
-        const rows = await db.query(sql);
+        // Execute the query
+        const [rows] = await db.query(sql); // Use array destructuring for mysql2/promise
 
-        // For the original 'mysql' package, query often returns rows as the first element
-        // If your setup returns [rows, fields], you may need const [rows] = await db.query(sql);
         res.json(rows);
 
     } catch (err) {
@@ -38,14 +36,14 @@ router.get('/', async (req, res) => {
 });
 
 // -------------------------------------------------------------------
-// GET /api/places/rand - Get 10 random places (Replaces $sample)
+// GET /api/places/rand - Get 10 random places
 // -------------------------------------------------------------------
 router.get('/rand', async (req, res) => {
     const db = req.app.locals.db;
     try {
-        // Use the MySQL RAND() function to mimic MongoDB's $sample
+        // Use the MySQL RAND() function to get a random sample
         const sql = `SELECT * FROM ${TABLE_NAME} ORDER BY RAND() LIMIT 10`;
-        const rows = await db.query(sql);
+        const [rows] = await db.query(sql);
         res.json(rows);
     } catch (err) {
         console.error('Error fetching random places:', err);
@@ -62,7 +60,7 @@ router.get('/:id', async (req, res) => {
     try {
         // Find the place by its primary key 'id'
         const sql = `SELECT * FROM ${TABLE_NAME} WHERE id = ?`;
-        const rows = await db.query(sql, [id]);
+        const [rows] = await db.query(sql, [id]);
 
         if (rows.length === 0) {
             return res.status(404).json({ message: `Place with ID ${id} not found` });
@@ -76,15 +74,18 @@ router.get('/:id', async (req, res) => {
 });
 
 // -------------------------------------------------------------------
-// POST /api/places - Add a new place (Replaces place.save())
+// POST /api/places - Add a new place (Uses transaction for safety)
 // -------------------------------------------------------------------
 router.post('/', async (req, res) => {
     const db = req.app.locals.db;
     
     // Destructure required fields from the request body
-    const { name, category, description, address, kecamatan, operating_hours, price, facilities, latitude, longitude, photo_url } = req.body;
+    const { 
+        name, category, description, address, kecamatan, 
+        operating_hours, price, facilities, 
+        latitude, longitude, photo_url 
+    } = req.body;
 
-    // Use a transaction for safe insertion, although not strictly required here, it's good practice.
     let connection;
     try {
         connection = await db.getConnection(); // Get connection from pool
@@ -100,14 +101,15 @@ router.post('/', async (req, res) => {
         // Prepare values, JSON.stringify complex objects for storage
         const values = [
             name, category, description, address, kecamatan,
-            JSON.stringify(operating_hours || {}),
+            // JSON.stringify ensures objects/arrays are stored as valid strings in the DB
+            JSON.stringify(operating_hours || {}), 
             JSON.stringify(price || {}),
             JSON.stringify(facilities || []),
             latitude, longitude, photo_url
         ];
 
         // Execute the query
-        const result = await connection.query(sql, values);
+        const [result] = await connection.query(sql, values);
         await connection.commit();
 
         // The result object contains insertId (the new auto-incremented primary key)
@@ -127,7 +129,7 @@ router.post('/', async (req, res) => {
 });
 
 // -------------------------------------------------------------------
-// PATCH /api/places/:id - Update a place (Replaces place.save() patch logic)
+// PATCH /api/places/:id - Update a place (Dynamic patching)
 // -------------------------------------------------------------------
 router.patch('/:id', async (req, res) => {
     const db = req.app.locals.db;
@@ -170,7 +172,7 @@ router.patch('/:id', async (req, res) => {
         await db.query(sql, updateValues);
 
         // 4. Fetch and return the updated row for consistency
-        const updatedRow = await db.query(`SELECT * FROM ${TABLE_NAME} WHERE id = ?`, [id]);
+        const [updatedRow] = await db.query(`SELECT * FROM ${TABLE_NAME} WHERE id = ?`, [id]);
         res.json(updatedRow[0]);
 
     } catch (err) {
@@ -180,14 +182,14 @@ router.patch('/:id', async (req, res) => {
 });
 
 // -------------------------------------------------------------------
-// DELETE /api/places/:id - Delete a place (Replaces place.deleteOne())
+// DELETE /api/places/:id - Delete a place
 // -------------------------------------------------------------------
 router.delete('/:id', async (req, res) => {
     const db = req.app.locals.db;
     const id = req.params.id;
     try {
         const sql = `DELETE FROM ${TABLE_NAME} WHERE id = ?`;
-        const result = await db.query(sql, [id]);
+        const [result] = await db.query(sql, [id]);
         
         // result.affectedRows checks if any row was actually deleted
         if (result.affectedRows === 0) {
