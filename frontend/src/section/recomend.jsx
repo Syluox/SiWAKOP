@@ -1,39 +1,30 @@
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom"; 
+import { useNavigate } from "react-router-dom"; // Only need useNavigate
 import "../style/App.css";
 import "./recomend.css";
 import "../style/Media_768.css";
 
-// Helper function to shuffle an array (Fisher-Yates algorithm)
-const shuffleArray = (array) => {
-    // Create a copy of the array to avoid modifying the original state directly
-    const shuffled = [...array];
-    for (let i = shuffled.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-    }
-    return shuffled;
-};
 
+
+// import PlaceDetail from "../pages/PlaceDetail"; // Not needed here
 
 function RecommendSection() {
-    // State to hold the final places to display (4 or 8)
-    const [places, setPlaces] = useState([]); 
-    // State to hold the FULL list of fetched data
-    const [fullData, setFullData] = useState([]); 
-
+    const [places, setPlaces] = useState([]);
     const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
     const navigate = useNavigate();
 
+    // 1. Accept the ID as an argument
     const handleDetailClick = (placeId) => {
+        // 2. Construct the final URL using template literals
+        // If your route is /detail/:id, the URL should be /detail/12345
         navigate(`/detail/${placeId}`); 
     }
 
-    // --- EFFECT 1: Handle window resize ---
+    // Handle window resize for responsive design
     useEffect(() => {
         const handleResize = () => {
             setIsMobile(window.innerWidth <= 768);
@@ -43,55 +34,37 @@ function RecommendSection() {
         return () => window.removeEventListener('resize', handleResize);
     }, []);
 
-    // --- EFFECT 2: Fetch ALL places (Runs only once on mount) ---
+    // Fetch places from MongoDB
     useEffect(() => {
-        const fetchAllPlaces = async () => {
+        const fetchPlaces = async () => {
             setLoading(true);
             try {
                 const response = await axios.get('http://localhost:5000/api/places/');
                 const data = response.data;
-                
-                // Store the full list of places
-                setFullData(data); 
+                console.log('Fetched recommended places:', data);
+                // If on mobile, only take 4 places
+                const selected = isMobile ? data.slice(0, 4) : data;
+                setPlaces(selected);
                 setError(null);
             } catch (error) {
                 console.error('Error fetching places:', error);
                 setError(error.response?.data?.message || 'Failed to load recommendations');
+                if (error.response?.data?.error) {
+                    console.error('Server error details:', error.response.data.error);
+                }
             } finally {
                 setLoading(false);
             }
         };
 
-        fetchAllPlaces();
-    }, []); // Empty dependency array: runs once
-
-    // --- EFFECT 3: Select 4 or 8 random places based on screen size (Runs on fullData or isMobile change) ---
-    useEffect(() => {
-        if (fullData.length > 0) {
-            
-            // 1. Shuffle the full data to ensure randomness
-            const shuffled = shuffleArray(fullData);
-            
-            // 2. Determine the maximum display limit (8)
-            const maxToSelect = 8;
-            
-            // 3. Select the first 8 (or less if fullData is small)
-            const initialSelection = shuffled.slice(0, maxToSelect);
-
-            // 4. Apply the mobile limit (4) to the selected subset (8)
-            const finalDisplay = isMobile ? initialSelection.slice(0, 4) : initialSelection;
-            
-            setPlaces(finalDisplay);
-        }
-    }, [fullData, isMobile]); // Re-run when fetched data arrives OR when screen size changes
-    
-    // --- Render Logic ---
+        fetchPlaces();
+    }, [isMobile]); // Re-fetch when screen size changes
 
     if (loading) {
         return (
             <section id="recommend">
                 <div className="container">
-                    <div className="loading-message">Memuat tempat rekomendasi...</div>
+                    <div className="loading-message">Loading recommended places...</div>
                 </div>
             </section>
         );
@@ -101,18 +74,7 @@ function RecommendSection() {
         return (
             <section id="recommend">
                 <div className="container">
-                    <div className="error-message">Terjadi kesalahan: {error}</div>
-                </div>
-            </section>
-        );
-    }
-
-    // Display message if no places are found after loading
-    if (places.length === 0 && !loading) {
-        return (
-            <section id="recommend">
-                <div className="container">
-                    <div className="error-message">Tidak ada rekomendasi tempat yang ditemukan.</div>
+                    <div className="error-message">{error}</div>
                 </div>
             </section>
         );
@@ -143,12 +105,13 @@ function RecommendSection() {
                                 <h3>{place.name}</h3>
                                 <p className="recom-category">{place.category}</p>
                                 <p className="recom-description">
-                                    {place.description && place.description.length > 100 
+                                    {place.description.length > 100 
                                         ? place.description.substring(0, 100) + '...' 
                                         : place.description}
                                 </p>
                                 <div className="recom-footer">
                                     <span className="recom-location">{place.kecamatan}</span>
+                                    {/* 3. Call the function with the specific place ID */}
                                     <button 
                                         className="about-cta explore-cta" 
                                         onClick={() => handleDetailClick(place._id)}

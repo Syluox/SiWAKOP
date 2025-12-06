@@ -171,7 +171,7 @@ function App() {
                 alert("❌ " + data.message);
             }
         } catch (err) {
-            alert("⚠️ Server error, please try again later.");
+            alert("⚠️ Server error, please try again later.", err);
         }
     };
     

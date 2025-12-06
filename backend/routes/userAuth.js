@@ -62,9 +62,9 @@ router.post("/login", async (req, res) => {
   try {
     const { username, password } = req.body;
     //Admin login bypass
-    if(username === "admin" && password === "unity12"){
+    if(username === "admin" && password === "admin"){
       const token = jwt.sign(
-        { id: "admin_id", username: "admin" },
+        { id:1, username: "admin" },
         process.env.JWT_SECRET || "secret",
         { expiresIn: "1h" }
       );
@@ -72,7 +72,8 @@ router.post("/login", async (req, res) => {
         success: true,
         message: "Admin login successful",
         token,
-        user: { id: "admin_id", username: "admin", email: "unknow@admin.co" }
+        user: { id: "admin_id", username: "admin", email: "unknow@admin.co" },
+        isAdmin: true
       });
     }
 
