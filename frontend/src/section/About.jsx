@@ -5,9 +5,6 @@ const About = forwardRef((props, ref)   => {
     <section ref={ref} id="about" className="about-section">
       <div className="container about-container">
         <div className="about-card">
-          <div className="about-image" aria-hidden>
-            <img src="/dum-img.jpg" alt="Pemandangan Palu" />
-          </div>
 
           <div className="about-content">
             <h1>Tentang SiWAKOP</h1>
